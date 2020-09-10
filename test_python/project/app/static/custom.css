@@ -1,0 +1,44 @@
+body {
+  align-items: center;
+  display: flex !important;
+  min-height: 100vh;
+  background-color: #e4e5e6!important;
+}
+
+.app-body {
+  display: flex;
+  flex-direction: row;
+  flex-grow: 1;
+  overflow-x: hidden;
+  width: 100%;
+  min-height: 100vh;
+}
+
+.app-body .card {
+  padding: 20px;
+  width: 100%;
+  min-height: 100vh;
+}
+
+.error {
+  color: red
+}
+
+table {
+  border-spacing: 0;
+  text-align: center;
+}
+th {
+  background: #b1b1b1;
+  color: white;
+  padding: 10px 20px;
+}
+th, td {
+  border-style: solid;
+  border-width: 0 1px 1px 0;
+  border-color: #ffffff;
+}
+td {
+  padding: 10px 20px;
+  background: #e2e2e2;
+}

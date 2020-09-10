@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>Test app</title>
+  <link rel="stylesheet" type="text/css"  href="/static/custom.css"/>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+</head>
+
+<body>
+  <div class="app-body">
+    <div class="card">
+      <div class="header">
+        <h3 class="text-muted">
+          {% if id %}
+          Edit user {{id}}
+          {% else %}
+          New user
+          {% endif%}
+        </h3>
+      </div>
+      {% if error %}
+      <p class=error><strong>Error:</strong> {{ error }}
+        {% endif %}
+      <form method="post" action="{{ url_for('main.api_edit_user' if id else 'main.api_create_user' ) }}">
+        {% if id %}
+        <input name="id" value="{{id}}" id="inputId" class="form-control" hidden>
+        {% endif%}
+        <div class="row">
+          <div class="col-12 col-md-3">
+            <label for="inputName">Name</label>
+            <input name="name" value="{{name}}" id="inputName" class="form-control" required autofocus>
+          </div>
+          <div class="col-12 col-md-3">
+            <label for="inputPassword">Password</label>
+            <input name="password" id="inputPassword" class="form-control"
+                   {% if not id %} required {% endif%}>
+          </div>
+          <div class="col-12 col-md-3">
+            <label for="inputPerm">&nbsp;</label>
+            <div>
+              <input type="checkbox" name="permission" id="inputPerm" {{permission}}>
+              <label for="inputPerm">Permission</label>
+            </div>
+          </div>
+        </div>
+        <button type="submit" class="btn btn-success m-1">Save</button>
+      </form>
+    </div>
+  </div>
+</body>

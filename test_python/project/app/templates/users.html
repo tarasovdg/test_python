@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>Test app</title>
+  <link rel="stylesheet" type="text/css"  href="/static/custom.css"/>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+</head>
+
+<body>
+<div class="app-body">
+  <div class="card">
+    <div class="header">
+      <h3 class="text-muted">Users</h3>
+    </div>
+
+    <div style="display: inline-flex">
+      <form method="get" action="/task_two">
+          <button type="submit" class="btn btn-primary m-1">Task two</button>
+      </form>
+
+      {% if perm %}
+      <form method="get" action="/create_user">
+          <button type="submit" class="btn btn-success m-1">New User</button>
+      </form>
+      {% endif %}
+    </div>
+
+    {% if error %}
+      <p class=error><strong>Error:</strong> {{ error }}
+    {% endif %}
+
+    <table>
+      <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Permission</th>
+        <th>Action</th>
+      </tr>
+      {% for user in res['objects'] %}
+      <tr>
+        <td>{{user.id}}</td>
+        <td>{{user.name}}</td>
+        <td>{{user.permission}}</td>
+        <td>
+          {% if perm %}
+          <form method="get" action="/edit/{{user.id}}">
+            <button type="submit" class="btn btn-primary mb-1">Edit</button>
+          </form>
+          <form method="post" action="/delete/{{user.id}}">
+            <button type="submit" class="btn btn-danger">Delete</button>
+          </form>
+          {% endif %}
+        </td>
+      </tr>
+      {% endfor %}
+    </table>
+    Total: {{res['total']}}
+  </div>
+</div>
+</body>
